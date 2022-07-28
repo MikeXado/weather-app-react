@@ -103,14 +103,14 @@ function App() {
           <div className="content-weather__info weather-info section">
             <ul className="weather-info__links-body">
                <li className="weather-info__links-item">
-                 <NavLink to='weather-app-react' className="weather-info__link">Weather</NavLink>
+                 <NavLink to='/' className="weather-info__link">Weather</NavLink>
                </li>
                <li className="weather-info__links-item">
-                 <NavLink to='weather-app-react/map' className="weather-info__link">Map</NavLink>
+                 <NavLink to='/map' className="weather-info__link">Map</NavLink>
                </li>
             </ul>
              <Routes>
-             <Route path='/weather-app-react' element={
+             <Route path='/' element={
               <div className="weather-info__content">
             <div className="weather-info__forecast" >
        <Swiper
@@ -234,7 +234,7 @@ function App() {
             </div>
              } />
 
-             <Route path="/weather-app-react/map" element={<Map />} />
+             <Route path="/map" element={<Map />} />
             
           </Routes>
           </div>
