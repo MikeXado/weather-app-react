@@ -1,0 +1,166 @@
+import React , {useState , useEffect} from 'react';
+import '../App.scss';
+import {  MdArrowLeft ,  MdArrowRight } from 'react-icons/md';
+import { Forecastcard } from '../componets/forescastCard';
+
+function Weather() {
+    
+    const [data, setData] = useState({});
+        const [getState, setGetState] = useState("Chisinau");
+        const [state, setState] = useState("Chisinau");
+        
+          const testApi = `https://api.openweathermap.org/data/2.5/forecast?q=${state}&units=metric&appid=ba44d117b74fac73ab60822ba9e461ae`
+         useEffect(() => {
+           fetch(testApi).then((response) => response.json()).then((data) => setData(data));
+         } , [testApi]);
+       
+       
+         const inputHandler = (event) => {
+            setGetState(event.target.value);
+          };
+       
+        
+        const submitHandler = () => {
+          setState(getState);
+        };
+       
+       const slideLeft = () => {
+         var slider = document.querySelector(".weather-app__forecast")
+         slider.scrollLeft -= 50;
+       }
+       
+       const slideRight = () => {
+         var slider = document.querySelector(".weather-app__forecast")
+         slider.scrollLeft += 50;
+       }
+       
+        let day1 = new Date(data.list && data.list[8].dt_txt)
+        let day2 = new Date(data.list && data.list[16].dt_txt)
+        let day3 = new Date(data.list && data.list[24].dt_txt)
+        let day4 = new Date(data.list && data.list[32].dt_txt)
+        let day5 = new Date(data.list && data.list[39].dt_txt)
+        
+         return (
+            <div className="weather-app">
+            <h1 className="weather-app-title">Weather App</h1>
+            <div className="weather-app__inputs">
+               <input type="text" id="city"  placeholder="Type a city name..." onChange={inputHandler}
+                   value={getState} />
+               <div className="btn" onClick={submitHandler}>Search</div>
+              </div>
+             <div className="weather-app__content">
+                <h1 className="city-name">{data.city?.name}</h1>
+                <div className="weather-app__general-info">
+                <div className="weather-app__temperature">
+                <img src={`http://openweathermap.org/img/w/${data.list && data.list[0].weather && data.list[0].weather[0].icon}.png`} alt="" />
+                   <div className="temValue">{Math.floor(data.list && data.list[0].main?.temp)} <span>&deg;C</span></div>
+                </div>
+                <div className="weather-app__wind-humidity">
+                <div className="weather-app__humidity">Humidity: {data.list && data.list[0].main?.humidity}%</div>
+                <div className="weather-app__wind">Wind: {Math.floor( data.list && data.list[0].wind?.speed)} km/h</div>
+                </div>
+               </div>
+           
+                 
+                  
+               
+           <div className="weather-app__forecast">
+                   <Forecastcard dayName={day1.toLocaleString("en-us", { weekday: "long" })} dayIcon={data.list && data.list[8].weather && data.list[8].weather[0].icon} tempMax={Math.floor(data.list && data.list[8].main?.temp_max)} tempMin={Math.floor(data.list && data.list[11].main?.temp_min)}/>
+                   <Forecastcard dayName={day2.toLocaleString("en-us", { weekday: "long" })} dayIcon={data.list && data.list[16].weather && data.list[16].weather[0].icon} tempMax={Math.floor(data.list && data.list[16].main?.temp_max)} tempMin={Math.floor(data.list && data.list[19].main?.temp_min)}/>
+                   <Forecastcard dayName={day3.toLocaleString("en-us", { weekday: "long" })} dayIcon={data.list && data.list[24].weather && data.list[24].weather[0].icon} tempMax={Math.floor(data.list && data.list[24].main?.temp_max)} tempMin={Math.floor(data.list && data.list[27].main?.temp_min)}/>
+                   <Forecastcard dayName={day4.toLocaleString("en-us", { weekday: "long" })} dayIcon={data.list && data.list[32].weather && data.list[32].weather[0].icon} tempMax={Math.floor(data.list && data.list[32].main?.temp_max)} tempMin={Math.floor(data.list && data.list[35].main?.temp_min)}/>
+                   <Forecastcard dayName={day5.toLocaleString("en-us", { weekday: "long" })} dayIcon={data.list && data.list[39].weather && data.list[39].weather[0].icon} tempMax={Math.floor(data.list && data.list[39].main?.temp_max)} tempMin={Math.floor(data.list && data.list[36].main?.temp_min)}/>
+                 </div> 
+       
+                 <div className="forecast-arrows">
+             <div className="forecast-arrows__left"> <MdArrowLeft onClick={slideLeft} size={30} /></div>
+             <div className="forecast-arrows__right"> <MdArrowRight onClick={slideRight} size={30} /></div>
+                </div>
+       
+             </div>
+           </div>
+          
+         );
+}
+
+
+export {Weather};
+
+
+
+
+import {  MdArrowLeft ,  MdArrowRight } from 'react-icons/md';
+
+
+
+
+<Forecastcard
+                    dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[0].time} 
+                   forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[0].condition?.icon}
+                    maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[0].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[1].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[1].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[1].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[2].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[2].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[2].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[3].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[3].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[3].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[4].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[4].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[4].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[5].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[5].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[5].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[6].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[6].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[6].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[7].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[7].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[7].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[8].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[8].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[8].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[9].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[9].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[9].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[10].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[10].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[10].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[11].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[11].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[11].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[12].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[12].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[12].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[13].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[13].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[13].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[14].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[14].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[14].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[15].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[15].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[15].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[16].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[16].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[16].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[17].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[17].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[17].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[18].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[18].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[18].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[19].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[19].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[19].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[20].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[20].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[20].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[21].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[21].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[21].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[22].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[22].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[22].temp_c}/>
+                    <Forecastcard dayName={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[23].time} forecastIcon= {weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[23].condition?.icon} maxTemp={weather.forecast?.forecastday && weather.forecast.forecastday[0].hour && weather.forecast.forecastday[0].hour[23].temp_c}/>
+ 
+
+  position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+
+
+      <div className="weather-initial">
+   <img className="search-weather__icon" src={searchGif} alt="search" />
+   <input className="search-weather__input" type="text" placeholder="Location here..." onKeyUp={enter}  onChange={inputHandler} value={getState}  />
+</div>
+
+
+.weather-initial {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: fixed;
+   width: 100%;
+   height: 100vh;
+   z-index: 999;
+   background-color: rgb(33, 33, 33);
+
+   img {
+    width: 50px;
+
+   }
+
+   input {
+     width: 300px;
+     height: 50px;
+     background: transparent;
+     border: none;
+     border-bottom: 2px solid #fff;
+     margin-left: 30px;
+     font-size: 20px;
+     font-family: "Poppins";
+     color: #fff;
+   }
+   
+}
