@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/MikeXado/weather-app-react/static/css/main.ec696f48.css",
-    "main.js": "/MikeXado/weather-app-react/static/js/main.f857f4f9.js",
-    "static/media/weather2.gif": "/MikeXado/weather-app-react/static/media/weather2.e7d7dd81d333570f2b10.gif",
-    "static/media/search2.gif": "/MikeXado/weather-app-react/static/media/search2.6297f34b7ae36b0af486.gif",
-    "static/media/pressure.png": "/MikeXado/weather-app-react/static/media/pressure.0cb72b298555c4192aa7.png",
-    "static/media/humidity1.png": "/MikeXado/weather-app-react/static/media/humidity1.14eebc43287b73e7773c.png",
-    "static/media/visibility.png": "/MikeXado/weather-app-react/static/media/visibility.d6c7225f969ca1f0d064.png",
-    "static/media/wind.png": "/MikeXado/weather-app-react/static/media/wind.727c05813e36e3fc0a15.png",
-    "static/media/precipitation.png": "/MikeXado/weather-app-react/static/media/precipitation.e547cdcceafb26860a42.png",
-    "static/media/feelsLike.png": "/MikeXado/weather-app-react/static/media/feelsLike.033aa1d011b0bd74d75f.png",
-    "index.html": "/MikeXado/weather-app-react/index.html",
-    "main.ec696f48.css.map": "/MikeXado/weather-app-react/static/css/main.ec696f48.css.map",
-    "main.f857f4f9.js.map": "/MikeXado/weather-app-react/static/js/main.f857f4f9.js.map"
+    "main.css": "/weather-app-react/static/css/main.ec696f48.css",
+    "main.js": "/weather-app-react/static/js/main.a4af281a.js",
+    "static/media/weather2.gif": "/weather-app-react/static/media/weather2.e7d7dd81d333570f2b10.gif",
+    "static/media/search2.gif": "/weather-app-react/static/media/search2.6297f34b7ae36b0af486.gif",
+    "static/media/pressure.png": "/weather-app-react/static/media/pressure.0cb72b298555c4192aa7.png",
+    "static/media/humidity1.png": "/weather-app-react/static/media/humidity1.14eebc43287b73e7773c.png",
+    "static/media/visibility.png": "/weather-app-react/static/media/visibility.d6c7225f969ca1f0d064.png",
+    "static/media/wind.png": "/weather-app-react/static/media/wind.727c05813e36e3fc0a15.png",
+    "static/media/precipitation.png": "/weather-app-react/static/media/precipitation.e547cdcceafb26860a42.png",
+    "static/media/feelsLike.png": "/weather-app-react/static/media/feelsLike.033aa1d011b0bd74d75f.png",
+    "index.html": "/weather-app-react/index.html",
+    "main.ec696f48.css.map": "/weather-app-react/static/css/main.ec696f48.css.map",
+    "main.a4af281a.js.map": "/weather-app-react/static/js/main.a4af281a.js.map"
   },
   "entrypoints": [
     "static/css/main.ec696f48.css",
-    "static/js/main.f857f4f9.js"
+    "static/js/main.a4af281a.js"
   ]
 }
