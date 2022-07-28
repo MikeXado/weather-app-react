@@ -4,15 +4,15 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import './App.scss';
 import App from './App';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter , HashRouter} from 'react-router-dom';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
     <App />
-    </BrowserRouter>
+    </HashRouter>
     </React.StrictMode>,
 );
