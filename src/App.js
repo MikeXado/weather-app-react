@@ -110,7 +110,7 @@ function App() {
                </li>
             </ul>
              <Routes>
-             <Route path='/' element={
+             <Route path='/weather-app-react' element={
               <div className="weather-info__content">
             <div className="weather-info__forecast" >
        <Swiper
@@ -234,7 +234,7 @@ function App() {
             </div>
              } />
 
-             <Route path="/map" element={<Map />} />
+             <Route path="weather-app-react/map" element={<Map />} />
             
           </Routes>
           </div>
